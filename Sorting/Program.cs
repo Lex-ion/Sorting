@@ -6,13 +6,13 @@
         {
             Console.WriteLine("Hello, World!");
 
-            
 
 
-           
+
+          //  MergeSort(DataGen(10));
 
 
-          Console.WriteLine(IsSorted(SelectionSort(DataGen(500))));
+          Console.WriteLine(IsSorted(MergeSort(DataGen(500))));
         }
 
         public static int[] DataGen(int length)
@@ -139,7 +139,99 @@
             }return input;
         }
 
+        public static int[] InsertionSort(int[] input)
+        {
+            for (int i = 0; i < input.Length-1; i++)
+            {
+                
+                int cycles = i+1;
+                int currentNum = input[cycles];
+                while (cycles > 0 && currentNum > input[cycles-1])
+                {
+                    input[cycles] = input[cycles - 1];
+                    cycles--;
+                        
+                }
+
+                input[cycles] = currentNum;
+             }
+            return input;
+        }
+
+        public static int[] MergeSort(int[] input)
+        {
+           if (input.Length <= 1)
+           {
+               return input;
+           }
+
+
+
+           //rozdělení
+
+           int sizeOfHalf = 0;
+           int sizeOfSecHalf = 0;
+           if (input.Length % 2==1)
+           {
+               sizeOfHalf = (input.Length + 1) / 2;
+               sizeOfSecHalf = input.Length - sizeOfHalf;
+           }
+           else
+           {
+              sizeOfHalf=input.Length/2;
+               sizeOfSecHalf = sizeOfHalf;
+           }
+           int[] half = new int[sizeOfHalf];
+           int[] secHalf =new int[sizeOfSecHalf];
         
+           for (int i = 0; i < half.Length; i++)
+           {
+               half[i] = input[i];
+           }
+           for (int i = half.Length; i < secHalf.Length + half.Length; i++)
+           {
+               secHalf[i-half.Length] = input[i];
+           }
+        
+               half=MergeSort(half);
+               secHalf=MergeSort(secHalf);
+        
+            //skládání:
+
+            int indexOfFirst=0;
+            int indexOfSecond=0;
+           
+
+            int[] output=new int[half.Length+secHalf.Length];
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                if (indexOfFirst > half.Length-1)
+                {
+                    output[i] = secHalf[indexOfSecond];
+                    indexOfSecond++;
+                }
+                else if (indexOfSecond>secHalf.Length-1)
+                {
+                    output[i] = half[indexOfFirst];
+                    indexOfFirst++;
+                }
+                else if (half[indexOfFirst] > secHalf[indexOfSecond])
+                {
+                    output[i] = half[indexOfFirst];
+                    indexOfFirst++;
+                }
+                else
+                {
+                    output[i] = secHalf[indexOfSecond];
+                    indexOfSecond++;
+                }
+                
+            }
+
+            
+        return output;
+        }
 
     }
 }
