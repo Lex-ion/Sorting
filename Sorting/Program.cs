@@ -6,13 +6,13 @@
         {
             Console.WriteLine("Hello, World!");
 
+
+
             
-
-
            
 
 
-          Console.WriteLine(IsSorted(SelectionSort(DataGen(500))));
+          Console.WriteLine(IsSorted(InsertionSort(DataGen(500))));
         }
 
         public static int[] DataGen(int length)
@@ -139,7 +139,25 @@
             }return input;
         }
 
-        
+        public static int[] InsertionSort(int[] input)
+        {
+            for (int i = 0; i < input.Length-1; i++)
+            {
+                
+                int cycles = i+1;
+                int currentNum = input[cycles];
+                while (cycles > 0 && currentNum > input[cycles-1])
+                {
+                    input[cycles] = input[cycles - 1];
+                    cycles--;
+                        
+                }
+
+                input[cycles] = currentNum;
+             }
+            return input;
+        }
+
 
     }
 }
