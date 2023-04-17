@@ -8,10 +8,6 @@
 
 
 
-
-          //  MergeSort(DataGen(10));
-
-
           Console.WriteLine(IsSorted(MergeSort(DataGen(500))));
         }
 
