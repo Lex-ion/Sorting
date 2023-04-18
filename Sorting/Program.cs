@@ -8,11 +8,10 @@
 
 
 
-
           //  MergeSort(DataGen(10));
 
 
-          Console.WriteLine(IsSorted(MergeSort(DataGen(500))));
+          Console.WriteLine(IsSorted(HeapSort(DataGen(500))));
         }
 
         public static int[] DataGen(int length)
@@ -45,9 +44,19 @@
                 if (input[i - 1] < input[i])
                 {
                     isSorted = false;
+                    break;
+                }
+            }
+            for (int i = 1; i < input.Length; i++)
+            {
+                if (input[i - 1] > input[i])
+                {
+                    
                     return isSorted;
                 }
-            }return isSorted;
+            }
+
+            return !isSorted;
         }
 
 
@@ -231,6 +240,47 @@
 
             
         return output;
+        }
+
+        public static int[] HeapSort(int[] input)
+        {
+            int[] orig = input;
+            
+
+            for (int countOfSorted = 0; countOfSorted < input.Length; countOfSorted++)
+            {
+                //heapify
+                bool changed = false;
+                while (!changed)
+                {
+                    changed = true;
+                    for (int i = 0; i < input.Length - countOfSorted; i++)
+                    {
+                        if ((i + 1) * 2 - 1 < input.Length - 1 - countOfSorted)
+                        {
+                            if (input[i] < input[(i + 1) * 2 - 1])
+                            {
+                                (input[i], input[(i + 1) * 2 - 1]) = (input[(i + 1) * 2 - 1], input[i]);
+                                changed = false;
+                            }
+                            if (input[i] < input[(i + 1) * 2])
+                            {
+                                (input[i], input[(i + 1) * 2]) = (input[(i + 1) * 2], input[i]);
+                                changed = false;
+                            }
+                        }
+
+                    }
+                }
+                (input[0], input[input.Length - 1 - countOfSorted]) = (input[input.Length - 1 - countOfSorted], input[0]);
+
+            }
+
+
+
+            return input;
+            
+
         }
 
     }
