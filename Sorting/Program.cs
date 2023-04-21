@@ -8,8 +8,9 @@
 
 
 
-          //  MergeSort(DataGen(10));
+            //  MergeSort(DataGen(10));
 
+            BubbleSort(DataGen(10));
 
           Console.WriteLine(IsSorted(HeapSort(DataGen(500))));
         }
@@ -244,9 +245,6 @@
 
         public static int[] HeapSort(int[] input)
         {
-            int[] orig = input;
-            
-
             for (int countOfSorted = 0; countOfSorted < input.Length; countOfSorted++)
             {
                 //heapify
@@ -274,14 +272,24 @@
                 }
                 (input[0], input[input.Length - 1 - countOfSorted]) = (input[input.Length - 1 - countOfSorted], input[0]);
 
+            }return input;
+        }
+
+        public static int[] BubbleSort(int[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                for (int j = 1; j<input.Length-i; j++)
+                {
+                    if(input[j] < input[j - 1])
+                    (input[j], input[j - 1]) = (input[j - 1], input[j]);
+                }
             }
 
 
-
             return input;
-            
-
         }
+
 
     }
 }
