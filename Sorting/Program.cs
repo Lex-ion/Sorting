@@ -10,10 +10,8 @@
 
             //  MergeSort(DataGen(10));
 
-            ShakerSort(DataGen(10));
-            
 
-          Console.WriteLine(IsSorted(HeapSort(DataGen(500))));
+          Console.WriteLine(IsSorted(CountSort(DataGen(500))));
         }
 
         public static int[] DataGen(int length)
@@ -313,6 +311,35 @@
             return input;
         }
 
+        public static int[] CountSort(int[] input) //řadí jen N(=přirozená čísla)
+        {
+            int[] output = new int[input.Length];
+
+            int max = input[0];
+            int min = input[0];
+            for (int i = 1; i < input.Length; i++)
+            {
+                if (input[i] > max) max = input[i];
+                else if (input[i] < min) min = input[i];
+            }
+            int[] index = new int[max-min+2];
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                index[input[i]]++;
+            }
+            for (int i = 1; i < index.Length; i++)
+            {
+                index[i] += index[i - 1];
+            }
+            for (int i = 0; i < input.Length; i++)
+            {
+                output[index[input[i]]-1] = input[i];
+                index[input[i]]--;
+            }
+
+            return output;
+        }
 
     }
 }
