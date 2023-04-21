@@ -10,7 +10,7 @@
 
             //  MergeSort(DataGen(10));
 
-            BubbleSort(DataGen(10));
+            
 
           Console.WriteLine(IsSorted(HeapSort(DataGen(500))));
         }
@@ -60,6 +60,14 @@
             return !isSorted;
         }
 
+        public static int[] Reverse(int[] input)
+        {
+            for (int i = 0; i < input.Length / 2; i++)
+            {
+                (input[i], input[input.Length-1-i]) = (input[input.Length - 1 - i], input[i]);
+            }return input;
+        }
+            
 
 
 
@@ -284,10 +292,7 @@
                     if(input[j] < input[j - 1])
                     (input[j], input[j - 1]) = (input[j - 1], input[j]);
                 }
-            }
-
-
-            return input;
+            }return input;
         }
 
 
