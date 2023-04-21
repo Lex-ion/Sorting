@@ -10,6 +10,7 @@
 
             //  MergeSort(DataGen(10));
 
+            ShakerSort(DataGen(10));
             
 
           Console.WriteLine(IsSorted(HeapSort(DataGen(500))));
@@ -293,6 +294,23 @@
                     (input[j], input[j - 1]) = (input[j - 1], input[j]);
                 }
             }return input;
+        }
+        public static int[] ShakerSort(int[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                for (int j = 1; j < input.Length - i; j++)
+                {
+                    if (input[j] < input[j - 1])
+                        (input[j], input[j - 1]) = (input[j - 1], input[j]);
+                }
+                for (int j = input.Length - 2 - i; j > 0+i; j--)
+                {
+                    if (input[j] > input[j + 1])
+                        (input[j], input[j + 1]) = (input[j + 1], input[j]);
+                }
+            }
+            return input;
         }
 
 
