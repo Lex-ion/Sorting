@@ -1,4 +1,6 @@
-﻿namespace Sorting
+﻿using System.Linq;
+
+namespace Sorting
 {
     internal class Program
     {
@@ -11,7 +13,7 @@
             //  MergeSort(DataGen(10));
 
 
-          Console.WriteLine(IsSorted(CountSort(DataGen(500))));
+          Console.WriteLine(IsSorted((StalinSort(DataGen(500)))));
         }
 
         public static int[] DataGen(int length)
@@ -67,7 +69,13 @@
             }return input;
         }
             
-
+        public static void ReadOut(int[] input)
+        {
+            foreach (int i in input)
+            {
+                Console.WriteLine(i);
+            }
+        }
 
 
         public static int[] QuickSort(int[] input)
@@ -339,6 +347,27 @@
             }
 
             return output;
+        }
+
+        public static int[] StalinSort(int[] input)
+        {
+            
+
+                if (input.Length < 2)
+                    return input;
+
+            List<int> ints= input.ToList();
+            int index = 1;
+            while (ints.Count > index)
+            {
+                if (ints[index - 1]  > ints[index])
+                {
+                    ints.Remove(ints[index]);
+                    index--;
+                }
+                index++;
+            }
+            return ints.ToArray();
         }
 
     }
